@@ -1,0 +1,44 @@
+#!/bin/sh
+
+system=`uname -s`
+nrandom=`date '+%d%H%M%S'`
+case $system in
+    Linux|LINUX|UNIX|Unix|Darwin|DARWIN)
+#	echo "You are running operating system" $system
+
+# A la: 
+# Generate a random number. Copyright (c) Michael Still 2002
+# Released under the terms of the GNU GPL
+# It works for RedHat Linux, but not on ALPHA machines:
+#	LOBOUND=1
+#	HIBOUND=9999
+#	RANDMAX=32767
+#	BINUMBER1=$(( $LOBOUND + ($HIBOUND * $RANDOM) / ($RANDMAX + 1) ))
+#	BINUMBER2=$(( $LOBOUND + ($HIBOUND * $RANDOM) / ($RANDMAX + 1) ))
+#	BINUMBER=$(( $BINUMBER1*10000+$BINUMBER2 ))
+#	echo $BINUMBER > nseed_runtime
+	echo $nrandom > nseed_runtime
+	;;
+    OSF*)
+#	echo "You are running operating system" $system
+	echo $nrandom > nseed_runtime
+	;;
+    *)
+	echo "You are running operating system other than Linux/UNIX/OSF"
+	echo "Modify this file first"
+	exit 1;
+	;;
+esac
+
+# rm -f *.o
+make
+cp input.ampt ana/
+echo "#  AMPT started at " `date` > start.time
+./ampt < nseed_runtime > nohup.out
+uname -n >> nohup.out
+cat start.time >> nohup.out
+rm -f start.time
+echo "#  AMPT Program finished at " `date` >> nohup.out
+tput bel
+sleep 1
+tput bel
