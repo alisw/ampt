@@ -1,6 +1,6 @@
 OBJ=main.o amptsub.o art1f.o \
 hijing1.383_ampt.o hipyset1.35.o zpc.o linana.o
-F77=f77
+F77=gfortran
 
 ampt: $(OBJ)
 	$(F77) -o ampt -O $(OBJ)
