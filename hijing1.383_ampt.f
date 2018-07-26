@@ -3544,6 +3544,22 @@ C
 C                ******** JP or JT can not produce jet anymore
 C
         IF(JOUT.EQ.0) THEN
+
+clin-2/2018 reset energy when energy < |pz| (due to finite precision 
+c     at very high energies for particles with energy ~= beam energy):
+        if(abs(PP(JP,3)).gt.PP(JP,4)) then
+           enenew=sqrt(PP(JP,1)**2+PP(JP,2)**2+PP(JP,3)**2+PP(JP,5)**2)
+           write(6,*) 'reset1:',
+     1          PP(JP,1),PP(JP,2),PP(JP,3),PP(JP,4),PP(JP,5),enenew
+           PP(JP,4)=enenew
+        endif
+        if(abs(PT(JT,3)).gt.PT(JT,4)) then
+           enenew=sqrt(PT(JT,1)**2+PT(JT,2)**2+PT(JT,3)**2+PT(JT,5)**2)
+           write(6,*) 'reset2:',
+     1          PT(JT,1),PT(JT,2),PT(JT,3),PT(JT,4),PT(JT,5),enenew
+           PT(JT,4)=enenew
+        endif
+C
                 EPP=PP(JP,4)+PP(JP,3)
                 EPM=PP(JP,4)-PP(JP,3)
                 ETP=PT(JT,4)+PT(JT,3)
@@ -4871,6 +4887,30 @@ C                ********total W+,W- and center-of-mass energy
         IF(WP.LT.0.0 .OR. WM.LT.0.0) GO TO 1000
 
         IF(JOUT.EQ.0) THEN
+
+clin-2/2018 reset energy when energy < |pz| (due to finite precision 
+c     at very high energies for particles with energy ~= beam energy):
+        if(abs(PP(JP,3)).gt.PP(JP,4)) then
+           enenew=sqrt(PP(JP,1)**2+PP(JP,2)**2+PP(JP,3)**2+PP(JP,5)**2)
+           write(6,*) 'reset3:',
+     1          PP(JP,1),PP(JP,2),PP(JP,3),PP(JP,4),PP(JP,5),enenew
+           PP(JP,4)=enenew
+        endif
+        if(abs(PT(JT,3)).gt.PT(JT,4)) then
+           enenew=sqrt(PT(JT,1)**2+PT(JT,2)**2+PT(JT,3)**2+PT(JT,5)**2)
+           write(6,*) 'reset4:',
+     1          PT(JT,1),PT(JT,2),PT(JT,3),PT(JT,4),PT(JT,5),enenew
+           PT(JT,4)=enenew
+        endif
+c     update variables:
+        EPP=PP(JP,4)+PP(JP,3)
+        EPM=PP(JP,4)-PP(JP,3)
+        ETP=PT(JT,4)+PT(JT,3)
+        ETM=PT(JT,4)-PT(JT,3)
+        WP=EPP+ETP
+        WM=EPM+ETM
+        SW=WP*WM
+C
                 IF(EPP.LT.0.0) GO TO 1000
                 IF(EPM.LT.0.0) GO TO 1000
                 IF(ETP.LT.0.0) GO TO 1000

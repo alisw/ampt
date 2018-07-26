@@ -1,6 +1,14 @@
 AMPT Users' Guide
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2/2018 test version v1.26t7b/v2.26t7b:
+     * Fixed a bug that causes fatal HIJHRD or HIJSFT error and leads to 
+       an incorrect impact parameter distribution (at sqrt_s>=5.023 TeV)
+       by resetting the energy in case energy < |pz| (due to finite precision 
+       at very high energies for particles with energy ~= beam energy).
+     * Updated some explanations in input.ampt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5/2016 test version v1.26t7/v2.26t7:
      * (w/ GL Ma) Changed the following line in art1f.f to avoid the bug
        that may lead to loss of hadrons inside ART (the bug is due to 

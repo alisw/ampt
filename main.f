@@ -123,9 +123,9 @@ c     Trigger Pt of high-pt jets in HIJING:
 c      HIPR1(10)=7.
 c
       if(isoft.eq.1) then
-         amptvn = '1.26t7 (Default)'
+         amptvn = '1.26t7b (Default)'
       elseif(isoft.eq.4) then
-         amptvn = '2.26t7 (StringMelting)'
+         amptvn = '2.26t7b (StringMelting)'
       else
          amptvn = 'Test-Only'
       endif
@@ -135,7 +135,7 @@ c
      &11X,'##################################################'/1X,
      &10X,'#      AMPT (A Multi-Phase Transport) model      #'/1X,
      &10X,'#          Version ',a25,                  '     #'/1X,
-     &10X,'#               10/28/2016                       #'/1X,
+     &10X,'#               02/17/2018                       #'/1X,
      &10X,'##################################################'/1X,
      &10X,' ')
 c     when ihjsed=11: use environment variable at run time for HIJING nseed:

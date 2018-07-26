@@ -1,15 +1,15 @@
 200            ! EFRM (sqrt(S_NN) in GeV if FRAME is CMS)
-CMS            ! FRAME
+CMS             ! FRAME
 A               ! PROJ
 A               ! TARG
 197             ! IAP (projectile A number)
 79              ! IZP (projectile Z number)
 197             ! IAT (target A number)
 79              ! IZT (target Z number)
-1             ! NEVNT (total number of events)
+1		! NEVNT (total number of events)
 0.              ! BMIN (mininum impact parameter in fm) 
 3.		! BMAX (maximum impact parameter in fm, also see below)
-4		! ISOFT (D=1): select Default AMPT or String Melting(see below)
+4		! ISOFT (D=4): select Default AMPT or String Melting(see below)
 150		! NTMAX: number of timesteps (D=150), see below
 0.2		! DT: timestep in fm (hadron cascade time= DT*NTMAX) (D=0.2)
 0.55		! PARJ(41): parameter a in Lund symmetric splitting function
@@ -20,7 +20,7 @@ A               ! TARG
 0		! quenching flag (D=0,no; 1,yes)
 2.0		! quenching parameter -dE/dx (GeV/fm) in case quenching flag=1
 2.0		! p0 cutoff in HIJING for minijet productions (D=2.0)
-2.265d0	! parton screening mass in fm^(-1) (D=2.265d0), see below
+2.265d0  	! parton screening mass in fm^(-1) (D=2.265d0), see below
 0		! IZPC: (D=0 forward-angle parton scatterings; 100,isotropic)
 0.33d0		! alpha in parton cascade (D=0.33d0), see parton screening mass
 1d6		! dpcoal in GeV
@@ -37,8 +37,8 @@ A               ! TARG
 1		! choice of cross section assumptions for deuteron reactions
 -7.		! Pt in GeV: generate events with >=1 minijet above this value
 1000		! maxmiss (D=1000): maximum # of tries to repeat a HIJING event
-3		! flag to turn off initial and final state radiation (D=3)
-1		! flag to turn off Kt kick (D=1)
+3		! flag on initial and final state radiation (D=3,both yes; 0,no)
+1		! flag on Kt kick (D=1,yes; 0,no)
 0		! flag to turn on quark pair embedding (D=0,no; 1,yes)
 7., 0.		! Initial Px and Py values (GeV) of the embedded quark (u or d)
 0., 0.		! Initial x & y values (fm) of the embedded back-to-back q/qbar
@@ -51,17 +51,17 @@ A               ! TARG
 BMAX:   the upper limit HIPR1(34)+HIPR1(35)=19.87fm (dAu), 25.60fm(AuAu).
 ISOFT:  1 Default, 
         4 String Melting.
-PARJ(41) & (42): 2.2 & 0.5/GeV^2 used for heavy ion (Au+Au, Pb+Pb) collisions,
-        while the HIJING values (0.5 & 0.9/GeV^2) describe well 
-        Nch in pp collisions and are used for d-Au collisions.
+PARJ(41) & (42): for string melting AMPT, 0.55 & 0.15/GeV^2 are recommended 
+	for top RHIC energies and 0.30 & 0.15/GeV^2 are recommended for 
+	LHC energies (see arXiv:1403.6321 for details).
 NTMAX:	number of time-steps for hadron cascade. 
 	Use a large value (e.g. 1000) for LHC studies or HBT studies at RHIC.
-	Using NTMAX=3 effectively turns off hadronic cascade.
+	Using NTMAX=2 or 3 effectively turns off hadronic cascade.
 parton screening mass (in 1/fm): its square is inversely proportional to 
-        the parton cross section. Use D=2.265d0 for 3mb cross section 
-        when alpha in parton cascade is set to 0.33;
-        (note: 3.2264d0 for 3mb cross section when alpha is set to 0.47).
-        Using 1d4 effectively turns off parton cascade.
+	the parton cross section. Use D=2.265d0 for 3mb cross section 
+	when alpha in parton cascade is set to 0.33;
+	(note: 3.2264d0 for 3mb cross section when alpha is set to 0.47).
+	Using 1d4 effectively turns off parton cascade.
 ihjsed: if =11, take HIJING random seed at runtime so that 
 	every run may be automatically different (see file 'exec').
 iksdcy: flag for K0s weak decays for comparison with data.
